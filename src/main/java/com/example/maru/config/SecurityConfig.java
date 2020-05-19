@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/oauth/token")
             .permitAll()
             .anyRequest()
-            .permitAll();
+            .authenticated();
     }
 
     @Bean

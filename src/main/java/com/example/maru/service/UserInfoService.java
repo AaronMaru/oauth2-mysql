@@ -1,13 +1,18 @@
 package com.example.maru.service;
 
+import com.example.maru.model.CustomUserDetails;
 import com.example.maru.model.UserInfo;
+import com.example.maru.model.Users;
 import com.example.maru.repository.UserDetailsRepository;
+import com.example.maru.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by : maru
@@ -21,6 +26,19 @@ public class UserInfoService {
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
+    private UsersRepository usersRepository;
+
+    public Users getUserByUserName(String userName) {
+        Optional<Users> usersOptional = usersRepository.findByName(userName);
+
+        usersOptional
+            .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        return usersOptional
+            .map(CustomUserDetails::new)
+            .get();
+    }
 
     public UserInfo getUserInfoByUserName(String userName) {
         short enabled = 1;

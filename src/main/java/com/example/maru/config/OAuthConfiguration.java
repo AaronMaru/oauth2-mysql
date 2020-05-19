@@ -31,7 +31,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
