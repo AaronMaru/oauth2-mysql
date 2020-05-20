@@ -48,9 +48,13 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        //oauth 2 only with JWT
         endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
             .accessTokenConverter(defaultAccessTokenConverter())
             .userDetailsService(userDetailsService);
+
+        //oauth 2 only
+        //endpoints.authenticationManager(authenticationManager);
     }
 
     @Bean
