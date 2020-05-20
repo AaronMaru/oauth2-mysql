@@ -2,6 +2,7 @@ https://www.youtube.com/watch?v=TNt3GHuayXs&list=PLqq-6Pq4lTTYTEooakHchTGglSvkZA
 
 https://github.com/TechPrimers/spring-security-oauth-mysql-example
 
+https://github.com/koushikkothagal/spring-security-jpa/tree/90a11f803384e23934dbe7bc288870a6b77c7eaa
 
 DROP TABLE IF EXISTS `role`;
 
