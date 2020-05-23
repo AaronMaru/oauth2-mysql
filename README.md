@@ -73,3 +73,5 @@ VALUES
 	
 	
 https://github.com/jwtk/jjwt
+
+https://github.com/amigoscode/spring-boot-security-course
