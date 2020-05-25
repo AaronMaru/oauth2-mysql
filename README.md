@@ -75,3 +75,5 @@ VALUES
 https://github.com/jwtk/jjwt
 
 https://github.com/amigoscode/spring-boot-security-course
+
+https://blog.usejournal.com/springboot-how-to-invalidate-jwt-token-such-as-logout-or-reset-all-active-tokens-73f55289d47b
