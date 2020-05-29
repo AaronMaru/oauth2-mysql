@@ -2,6 +2,7 @@ package com.example.maru.repository;
 
 import com.example.maru.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,5 +14,8 @@ import java.util.Optional;
  */
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
-    Optional<Users> findByName(String username);
+
+    @Query(value = "SELECT * FROM `user` WHERE email = :username OR `name` = :username", nativeQuery=true)
+    Optional<Users> findUser(String username);
+
 }

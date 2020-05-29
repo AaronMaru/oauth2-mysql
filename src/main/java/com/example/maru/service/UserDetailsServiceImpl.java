@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userInfo.getRole());
         return new User(userInfo.getUserName(), userInfo.getPassword(), Arrays.asList(grantedAuthority));*/
 
-        Optional<Users> usersOptional = usersRepository.findByName(userName);
+        Optional<Users> usersOptional = usersRepository.findUser(userName);
 
         usersOptional
             .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));

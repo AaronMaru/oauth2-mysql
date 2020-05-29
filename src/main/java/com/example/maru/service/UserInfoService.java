@@ -31,7 +31,7 @@ public class UserInfoService {
     private UsersRepository usersRepository;
 
     public Users getUserByUserName(String userName) {
-        Optional<Users> usersOptional = usersRepository.findByName(userName);
+        Optional<Users> usersOptional = usersRepository.findUser(userName);
 
         usersOptional
             .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
