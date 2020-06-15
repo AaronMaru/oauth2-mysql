@@ -6,9 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -56,5 +62,25 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(userInfo, HttpStatus.OK);
+	}
+
+	@GetMapping("/bcrypt")
+	public boolean bcrypt() {
+		String password = "password";
+
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+		String afterEncode = bCryptPasswordEncoder.encode(password);
+		System.out.println(afterEncode);
+
+		SCryptPasswordEncoder sCryptPasswordEncoder = new SCryptPasswordEncoder();
+		String afterScry = sCryptPasswordEncoder.encode(password);
+		System.out.println(afterScry);
+
+		StandardPasswordEncoder standardPasswordEncoder = new StandardPasswordEncoder();
+		String afterStandard = standardPasswordEncoder.encode(password);
+		System.out.println(afterStandard);
+
+		return bCryptPasswordEncoder.matches("password", afterEncode);
 	}
 }
