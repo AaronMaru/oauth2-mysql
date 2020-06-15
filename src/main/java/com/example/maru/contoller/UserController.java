@@ -81,6 +81,10 @@ public class UserController {
 		String afterStandard = standardPasswordEncoder.encode(password);
 		System.out.println(afterStandard);
 
+		StandardPasswordEncoder standardPasswordEncoderSecret = new StandardPasswordEncoder("abcmaru");
+		String afterStandardSecret= standardPasswordEncoderSecret.encode(password);
+		System.out.println(afterStandardSecret);
+
 		return bCryptPasswordEncoder.matches("password", afterEncode);
 	}
 }
