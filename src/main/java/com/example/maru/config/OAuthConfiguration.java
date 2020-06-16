@@ -33,6 +33,9 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    //    if we use delegating customer passwordEncoder
+    SecurityConfig securityConfig = new SecurityConfig();
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -42,6 +45,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
             .withClient("fooClientId").secret(new BCryptPasswordEncoder().encode("secret"))
+//            .withClient("fooClientId").secret(securityConfig.getPasswordEncoder().encode("secret"))
             .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("read", "write")
             .autoApprove(true);
     }

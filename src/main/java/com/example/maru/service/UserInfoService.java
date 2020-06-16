@@ -7,7 +7,7 @@ import com.example.maru.repository.UserDetailsRepository;
 import com.example.maru.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -29,6 +29,12 @@ public class UserInfoService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public UserInfoService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Users getUserByUserName(String userName) {
         Optional<Users> usersOptional = usersRepository.findUser(userName);
@@ -53,9 +59,9 @@ public class UserInfoService {
         return userDetailsRepository.findById(id);
     }
 
-    public UserInfo addUser(UserInfo userInfo) {
-        userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
-        return userDetailsRepository.save(userInfo);
+    public Users addUser(Users userInfo) {
+        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+        return usersRepository.save(userInfo);
     }
 
     public UserInfo updateUser(Integer id, UserInfo userRecord) {
